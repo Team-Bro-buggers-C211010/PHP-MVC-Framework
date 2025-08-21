@@ -1,0 +1,15 @@
+{
+    "name": "user/php-mvc-framework",
+    "autoload": {
+        "psr-4": {
+            "app\\": "./"
+        }
+    },
+    "authors": [
+        {
+            "name": "Team-Bro-buggers-C211010",
+            "email": "shovancse.iiuc.cp@gmail.com"
+        }
+    ],
+    "require": {}
+}
