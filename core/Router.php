@@ -19,12 +19,23 @@ class Router
         $this->routes['GET'][$path] = $callback;
     }
 
+    public function post(string $path, callable | string $callback)
+    {
+        $this->routes['POST'][$path] = $callback;
+    }
+
     // handle to show view files -> started from here
     public function renderView(string $view)
     {
         $layoutContent = $this->layoutContent();
         $viewContent = $this->renderOnlyView($view);
 
+        return str_replace('{{content}}', $viewContent, $layoutContent);
+    }
+
+    public function renderContent($viewContent) 
+    {
+        $layoutContent = $this->layoutContent();
         return str_replace('{{content}}', $viewContent, $layoutContent);
     }
 
@@ -63,7 +74,7 @@ class Router
 
         if (!$callback) {
             $this->response->setStatusCode(404);
-            return 'Not Found';
+            return $this->renderView("_404");
         }
 
         // render the view if the callback is a string

@@ -12,6 +12,8 @@
 </head>
 <body>
     <h1 class="text-3xl">Main Layout</h1>
-    {{content}}
+    <div class="container mx-auto p-4">
+        {{content}}
+    </div>
 </body>
 </html>
