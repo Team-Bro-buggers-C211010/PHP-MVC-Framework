@@ -6,11 +6,13 @@ class Router
 {
 
     public Request $request;
+    public Response $response;
     protected array $routes = [];
 
-    public function __construct(Request $request)
+    public function __construct(Request $request, Response $response)
     {
         $this->request = $request;
+        $this->response = $response;
     }
     public function get(string $path, callable | string $callback)
     {
@@ -28,7 +30,7 @@ class Router
 
     protected function layoutContent()
     {
-        
+
         /**
          * Renders the main layout view and returns its output as a string.
          * Uses output buffering to capture the rendered HTML content from the layout file
@@ -60,7 +62,7 @@ class Router
         $callback = $this->routes[$method][$path] ?? false;
 
         if (!$callback) {
-            http_response_code(404);
+            $this->response->setStatusCode(404);
             return 'Not Found';
         }
 
